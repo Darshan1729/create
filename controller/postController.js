@@ -1,5 +1,5 @@
 const PostMessage = require('../models/postMessage');
-const ObjectId = require('mongoose').Types.ObjectId;
+// const ObjectId = require('mongoose').Types.ObjectId;
 
 
 const getPost = async (req,res) =>{
@@ -44,7 +44,14 @@ const updatePost = (req,res) => {
 
 const deletePost = async (req,res) => {
     
+    const { id } = req.params
+
+    if(!{_id:id}){
+        return res.status(400).json('error while deleting the post ') 
+    }
+      
         
+
     await PostMessage.findByIdAndRemove(req.params.id,(error,data)=>{
         if(!error) res.send(data)
         else console.log('error while deleting record ' + error);
