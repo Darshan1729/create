@@ -28,7 +28,9 @@ const createPost = async (req,res) => {
 
 const updatePost = (req,res) => {
    
-    if(!ObjectId.isValid(req.params.id)){
+    const { id } = req.params
+
+    if(!{_id:id}){
         return res.status(400).json('error while updating the post ') 
     }
 
@@ -42,13 +44,12 @@ const updatePost = (req,res) => {
 
 const deletePost = async (req,res) => {
     
-   
-
-    const deletedPost = await PostMessage.findByIdAndRemove(req.params.id,(error,data)=>{
+        
+    await PostMessage.findByIdAndRemove(req.params.id,(error,data)=>{
         if(!error) res.send(data)
         else console.log('error while deleting record ' + error);
     });
-    console.log(deletedPost);
+
 };
 
 
